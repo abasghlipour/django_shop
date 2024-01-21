@@ -133,3 +133,11 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+EMAIL_BACKEND = django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST = "smtp.c1.liara.email"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "romantic_galois_hvcsui"
+EMAIL_HOST_PASSWORD = "1c32028d-4288-4f5a-af9c-fc28dbbac03e"
+EMAIL_USE_TLS = True
