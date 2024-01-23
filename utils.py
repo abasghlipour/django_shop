@@ -7,10 +7,11 @@ def send_sms(phone_number, otp_code, full_name):
     sms = Client(api_key)
     message = sms.send(
         sender="+983000505",
-        recipients=phone_number,
+        recipients=[phone_number, ],
         message=f'{full_name} عزیز کد احراز شما: {otp_code}',
         summary='description'
     )
+
 
 
 def send_email(email, subject, message):

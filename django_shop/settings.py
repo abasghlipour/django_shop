@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 import dj_database_url
+from django import core
 
 from pathlib import Path
 
@@ -135,7 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 
-EMAIL_BACKEND = django.core.mail.backends.smtp.EmailBackend
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.c1.liara.email"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "romantic_galois_hvcsui"

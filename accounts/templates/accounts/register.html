@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ورود
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section id="form"><!--form-->
+            <div class="row justify-content-center">
+                <div class="col-sm-4">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>ثبت نام کاربـر جدیـد</h2>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            {{ form_register.full_name }}
+                            {{ form_register.phone_number }}
+                            {{ form_register.email }}
+                            {{ form_register.password }}
+                            {{ form_register.password2 }}
+                            <button type="submit" class="btn btn-default">ثبت نام</button>
+                        </form>
+                    </div><!--/sign up form-->
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+
+
