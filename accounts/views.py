@@ -36,7 +36,7 @@ class UserRegisterView(View):
                 'full_name': form.cleaned_data['full_name'],
                 'password': form.cleaned_data['password']
             }
-            messages.success(request, 'کد احراز هویت با موفقیت ارسال شد','success')
+            messages.success(request, 'کد احراز هویت با موفقیت ارسال شد', 'success')
             return redirect('accounts:otp')
         return render(request, template_name=self.template_name, context={'form_register': form})
 
@@ -65,9 +65,9 @@ class OtpCodeView(View):
                                          user_session['password'])
                 code_instance.delete()
                 del request.session['user_register_info']
-                messages.success(request, 'شما با موفقیت ثیت نام شدید', 'success')
+                messages.success(request, 'شما با موفقیت ثبت نام شدید', 'success')
                 return redirect('home:index')
             else:
-                messages.error(request, 'this code is wrong', 'danger')
-                return redirect('accounts:register')
-        return redirect('home:home')
+                messages.error(request, 'کد شما اشتباه است', 'danger')
+                return redirect('accounts:otp')
+        return redirect('home:index')
