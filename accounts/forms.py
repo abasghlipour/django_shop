@@ -64,3 +64,15 @@ class OtpCodeForm(forms.ModelForm):
         widgets = {
             'code': forms.TextInput(attrs={'placeholder': 'کد احراز هویت'})
         }
+
+
+class UserLoginForm(forms.Form):
+    phone_number = forms.CharField(max_length=11, label='شماره تلفن',
+                                   widget=forms.TextInput(attrs={'placeholder': 'شماره تلفن'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'رمز عبور'}))
+
+    def clean_phone_number(self):
+        user = User.objects.filter(phone_number=self.phone_number).exists()
+        if user is None:
+            raise ValidationError('شماره تلفن قبلا ثبت نام نکرده است')
+        return user
