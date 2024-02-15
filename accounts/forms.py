@@ -71,8 +71,3 @@ class UserLoginForm(forms.Form):
                                    widget=forms.TextInput(attrs={'placeholder': 'شماره تلفن'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'رمز عبور'}))
 
-    def clean_phone_number(self):
-        user = User.objects.filter(phone_number=self.phone_number).exists()
-        if user is None:
-            raise ValidationError('شماره تلفن قبلا ثبت نام نکرده است')
-        return user

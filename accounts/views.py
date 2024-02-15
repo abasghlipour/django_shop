@@ -1,7 +1,7 @@
 import random
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from utils import send_mail, send_sms
 from django.shortcuts import render, redirect
@@ -101,3 +101,13 @@ class UserLoginView(View):
                 messages.success(request, 'شما با موفقیت وارد شدید', 'success')
                 if self.next:
                     return redirect(self.next)
+                return redirect('home:index')
+            messages.error(request, 'رمز عبور یا شماره تلفن اشتباه است', 'warning')
+        return render(request, self.template_name, {'form': form})
+
+
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, 'شما با موفقیت خارج شدید', 'success')
+        return redirect('home:index')
