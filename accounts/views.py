@@ -53,7 +53,9 @@ class OtpCodeView(View):
 
     def get(self, request):
         form = self.form_class
-        return render(request, template_name=self.template_name, context={'form': form})
+        user_session = request.session['user_register_info']
+        code_instance = Otp_code.objects.get(phone_number=user_session['phone_number'])
+        return render(request, template_name=self.template_name, context={'form': form,'code': code_instance})
 
     def post(self, request):
         user_session = request.session['user_register_info']

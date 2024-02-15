@@ -5,6 +5,53 @@
 {% endblock %}
 
 {% block content %}
+    {#    <style type="text/css">#}
+    {#        body {#}
+    {#            text-align: right;#}
+    {#            direction: rtl;#}
+    {#        }#}
+    {##}
+    {#        .btn-start-timer {#}
+    {#            text-align: center;#}
+    {#            margin-top: 300px;#}
+    {#        }#}
+    {##}
+    {#        .otp-timer {#}
+    {#            margin-top: 30px;#}
+    {#            font-family: tahoma;#}
+    {#            background-color: #eee;#}
+    {#            padding: 10px;#}
+    {#            display: flex;#}
+    {#            justify-content: center;#}
+    {#            align-items: center;#}
+    {#        }#}
+    {##}
+    {#        .otp-timer span {#}
+    {#            margin-left: 5px;#}
+    {#        }#}
+    {##}
+    {#        #minutes, #seconds {#}
+    {#            padding: 6px;#}
+    {#            max-width: 30px;#}
+    {#            border-radius: 3px;#}
+    {#            background-color: green;#}
+    {#            color: white;#}
+    {#        }#}
+    {##}
+    {#        button {#}
+    {#            background: #e80dbc;#}
+    {#            color: #040b04;#}
+    {#            padding: 10px;#}
+    {#            border: none;#}
+    {#            border-radius: 10px;#}
+    {#            cursor: pointer;#}
+    {#        }#}
+    {##}
+    {#        button:hover {#}
+    {#            background-color: green;#}
+    {#            color: white;#}
+    {#        }#}
+    {#    </style>#}
     <div class="container">
         <section id="form"><!--form-->
             <div class="row justify-content-center">
@@ -14,8 +61,63 @@
                         <form action="#" method="post">
                             {% csrf_token %}
                             {{ form.code }}
+                            <br>
+
                             <button type="submit" class="btn btn-default">تایید</button>
+
+
                         </form>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script>
+                            var minutes;
+                            var seconds;
+                            var set_inteval;
+
+                            function otp_timer() {
+                                seconds -= 1;
+                                document.getElementById('seconds').innerHTML = seconds;
+                                document.getElementById('minutes').innerHTML = minutes;
+                                if (seconds == 0) {
+                                    if (minutes > 0) {
+                                        seconds = 60;
+                                        minutes -= 1;
+                                    } else {
+                                        minutes = 0;
+                                        document.getElementById('minutes').innerHTML = minutes;
+                                        clearInterval(set_inteval);
+                                        minutes = 0;
+                                        seconds = 0;
+                                        document.getElementById('seconds').innerHTML = '00';
+                                        document.getElementById('minutes').innerHTML = '0';
+                                        document.getElementById('my-button').disabled = false;
+                                    }
+                                }
+                            }
+
+                            function startTimer() {
+                                minutes = 0;
+                                seconds = 10;
+                                document.getElementById('seconds').innerHTML = seconds;
+                                document.getElementById('minutes').innerHTML = minutes;
+                                set_inteval = setInterval('otp_timer()', 1000);
+                                document.getElementById('my-button').disabled = true;
+                            }
+
+                            $(document).ready(startTimer);
+
+                        </script>
+                        <br>
+                        <div class="otp-timer">
+                            <span class="text"> زمان باقیمانده :</span>
+                            <span id="seconds">00</span>
+                            <span class="dot">:</span>
+                            <span id="minutes">0</span>
+                            <button class="btn btn-info" id="my-button" disabled
+                                    onclick="location.href='{% url "home:index" %}'">ارسال مجدد
+                            </button>
+                        </div>
+
+
                     </div><!--/sign up form-->
                 </div>
             </div>
