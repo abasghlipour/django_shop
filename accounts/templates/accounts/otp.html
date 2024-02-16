@@ -5,53 +5,6 @@
 {% endblock %}
 
 {% block content %}
-    {#    <style type="text/css">#}
-    {#        body {#}
-    {#            text-align: right;#}
-    {#            direction: rtl;#}
-    {#        }#}
-    {##}
-    {#        .btn-start-timer {#}
-    {#            text-align: center;#}
-    {#            margin-top: 300px;#}
-    {#        }#}
-    {##}
-    {#        .otp-timer {#}
-    {#            margin-top: 30px;#}
-    {#            font-family: tahoma;#}
-    {#            background-color: #eee;#}
-    {#            padding: 10px;#}
-    {#            display: flex;#}
-    {#            justify-content: center;#}
-    {#            align-items: center;#}
-    {#        }#}
-    {##}
-    {#        .otp-timer span {#}
-    {#            margin-left: 5px;#}
-    {#        }#}
-    {##}
-    {#        #minutes, #seconds {#}
-    {#            padding: 6px;#}
-    {#            max-width: 30px;#}
-    {#            border-radius: 3px;#}
-    {#            background-color: green;#}
-    {#            color: white;#}
-    {#        }#}
-    {##}
-    {#        button {#}
-    {#            background: #e80dbc;#}
-    {#            color: #040b04;#}
-    {#            padding: 10px;#}
-    {#            border: none;#}
-    {#            border-radius: 10px;#}
-    {#            cursor: pointer;#}
-    {#        }#}
-    {##}
-    {#        button:hover {#}
-    {#            background-color: green;#}
-    {#            color: white;#}
-    {#        }#}
-    {#    </style>#}
     <div class="container">
         <section id="form"><!--form-->
             <div class="row justify-content-center">
@@ -113,7 +66,7 @@
                             <span class="dot">:</span>
                             <span id="minutes">0</span>
                             <button class="btn btn-info" id="my-button" disabled
-                                    onclick="location.href='{% url "home:index" %}'">ارسال مجدد
+                                    onclick="location.href='{% url "accounts:resend" %}'">ارسال مجدد
                             </button>
                         </div>
 

@@ -1,7 +1,9 @@
 import random
-
+from django.contrib.auth import views as auth_views
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse_lazy
+from requests import request
 
 from utils import send_mail, send_sms
 from django.shortcuts import render, redirect
@@ -55,7 +57,7 @@ class OtpCodeView(View):
         form = self.form_class
         user_session = request.session['user_register_info']
         code_instance = Otp_code.objects.get(phone_number=user_session['phone_number'])
-        return render(request, template_name=self.template_name, context={'form': form,'code': code_instance})
+        return render(request, template_name=self.template_name, context={'form': form, 'code': code_instance})
 
     def post(self, request):
         user_session = request.session['user_register_info']
@@ -113,3 +115,29 @@ class UserLogoutView(View):
         logout(request)
         messages.success(request, 'شما با موفقیت خارج شدید', 'success')
         return redirect('home:index')
+
+
+class ResendOtpCodeView(View):
+    def get(self, request):
+        user_session = request.session['user_register_info']
+        code_instance = Otp_code.objects.get(phone_number=user_session['phone_number'])
+        send_sms(phone_number=code_instance.phone_number, otp_code=code_instance.code,
+                 full_name=user_session['full_name'])
+        messages.success(request, 'کد احراز شما دوباره ارسال شد', 'success')
+        return redirect('accounts:otp')
+
+
+class ResetPasswordView(auth_views.PasswordResetView):
+    template_name = 'accounts/forget-password.html'
+    success_url = reverse_lazy('accounts:password_reset_done')
+    email_template_name = 'accounts/password_reset_email.html'
+
+
+class ResetPasswordDoneView(auth_views.PasswordResetDoneView):
+    template_name = 'accounts/password_reset_done.html'
+
+
+class ResetPasswordConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'accounts/password_reset_confirm.html'
+    # messages.success(request, 'رمز شما با موفقیت تغییر کرد', 'success')
+    success_url = reverse_lazy('home:index')
