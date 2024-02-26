@@ -135,9 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.c1.liara.email"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.c1.liara.email'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "infallible_leakey_8cpcf1"
-EMAIL_HOST_PASSWORD = "7656104e-df06-45df-a653-0386b2d2c38f"
+EMAIL_HOST_USER = "romantic_nobel_d7kut7"
+EMAIL_HOST_PASSWORD = "b6652a41-33cf-4afc-b9cb-de14506ad9d8"
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'info@abas-project.ir'

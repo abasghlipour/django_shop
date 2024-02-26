@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from requests import request
 
+import utils
 from utils import send_mail, send_sms
 from django.shortcuts import render, redirect
 from django.views import View
@@ -103,6 +104,7 @@ class UserLoginView(View):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'شما با موفقیت وارد شدید', 'success')
+                # send_mail(subject='tst',message='tdr4r',from_email='abasghlipour@gmail.com')
                 if self.next:
                     return redirect(self.next)
                 return redirect('home:index')
@@ -139,5 +141,4 @@ class ResetPasswordDoneView(auth_views.PasswordResetDoneView):
 
 class ResetPasswordConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'accounts/password_reset_confirm.html'
-    # messages.success(request, 'رمز شما با موفقیت تغییر کرد', 'success')
     success_url = reverse_lazy('home:index')
