@@ -72,6 +72,9 @@ class OtpCodeView(View):
                 code_instance.delete()
                 del request.session['user_register_info']
                 messages.success(request, 'شما با موفقیت ثبت نام شدید', 'success')
+                user = User.objects.create_user(user_session['phone_number'])
+                if user:
+                    login(request, user=user)
                 return redirect('home:index')
             else:
                 messages.error(request, 'کد شما اشتباه است', 'danger')

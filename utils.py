@@ -8,7 +8,7 @@ def send_sms(phone_number, otp_code, full_name):
     message = sms.send(
         sender="+983000505",
         recipients=[phone_number, ],
-        message=f'{full_name} عزیز کد احراز شما: {otp_code}',
+        message=f' خوش امدید:کد تایید شما {otp_code} \nعباس پروژه',
         summary='description'
     )
 
