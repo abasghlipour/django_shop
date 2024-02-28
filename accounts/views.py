@@ -42,7 +42,8 @@ class UserRegisterView(View):
             }
             messages.success(request, 'کد احراز هویت با موفقیت ارسال شد', 'success')
             return redirect('accounts:otp')
-        return render(request, template_name=self.template_name, context={'form_register': form})
+        messages.error(request, 'شما قبلا ثبت نام کرده اید', 'danger')
+        return redirect('accounts:login')
 
 
 class OtpCodeView(View):
@@ -107,12 +108,13 @@ class UserLoginView(View):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'شما با موفقیت وارد شدید', 'success')
-                # send_mail(subject='tst',message='tdr4r',from_email='abasghlipour@gmail.com')
                 if self.next:
                     return redirect(self.next)
                 return redirect('home:index')
             messages.error(request, 'رمز عبور یا شماره تلفن اشتباه است', 'warning')
-        return render(request, self.template_name, {'form': form})
+            return redirect('accounts:login')
+        messages.error(request, 'شما قبلا ثبت نام نکرده اید', 'danger')
+        return redirect('accounts:register')
 
 
 class UserLogoutView(View):

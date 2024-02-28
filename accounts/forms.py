@@ -56,18 +56,39 @@ class UserRegisterForm(forms.ModelForm):
             raise ValidationError('رمز عبور با تکرار آن برابر نیست')
         return cd['password2']
 
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        user = User.objects.filter(phone_number=phone_number).exists()
+        if user:
+            raise ValidationError('شما قبلا ثبت نام کرده اید')
+        return phone_number
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = User.objects.filter(email=email).exists()
+        if user:
+            raise ValidationError('شما قبلا ثبت نام کرده اید')
+        return email
+
 
 class OtpCodeForm(forms.ModelForm):
     class Meta:
         model = Otp_code
         fields = ['code', ]
         widgets = {
-            'code': forms.TextInput(attrs={'placeholder': 'کد احراز هویت',})
+            'code': forms.TextInput(attrs={'placeholder': 'کد احراز هویت', })
         }
 
 
 class UserLoginForm(forms.Form):
     phone_number = forms.CharField(max_length=11, label='شماره تلفن',
-                                   widget=forms.TextInput(attrs={'placeholder': 'شماره تلفن','onclick':"togglePasswordVisibility()"}))
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': 'شماره تلفن', 'onclick': "togglePasswordVisibility()"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'رمز عبور'}))
 
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        user = User.objects.filter(phone_number=phone_number).exists()
+        if not user:
+            raise forms.ValidationError('شما قبلا ثبت نام نکرده اید')
+        return phone_number
