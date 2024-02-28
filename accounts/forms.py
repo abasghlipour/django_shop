@@ -62,12 +62,12 @@ class OtpCodeForm(forms.ModelForm):
         model = Otp_code
         fields = ['code', ]
         widgets = {
-            'code': forms.TextInput(attrs={'placeholder': 'کد احراز هویت'})
+            'code': forms.TextInput(attrs={'placeholder': 'کد احراز هویت',})
         }
 
 
 class UserLoginForm(forms.Form):
     phone_number = forms.CharField(max_length=11, label='شماره تلفن',
-                                   widget=forms.TextInput(attrs={'placeholder': 'شماره تلفن'}))
+                                   widget=forms.TextInput(attrs={'placeholder': 'شماره تلفن','onclick':"togglePasswordVisibility()"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'رمز عبور'}))
 
