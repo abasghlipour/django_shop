@@ -72,7 +72,7 @@ class OtpCodeView(View):
                 code_instance.delete()
                 del request.session['user_register_info']
                 messages.success(request, 'شما با موفقیت ثبت نام شدید', 'success')
-                user = User.objects.filter(user=user_session['phone_number']).last()
+                user = User.objects.filter(phone_number=user_session['phone_number']).last()
                 if user:
                     login(request, user=user)
                 return redirect('home:index')
