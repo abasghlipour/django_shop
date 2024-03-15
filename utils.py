@@ -1,15 +1,11 @@
-from ippanel import Client
+import requests
 from django.core.mail import send_mail
 
 
 def send_sms(phone_number, otp_code, full_name):
     api_key = "rDQJQVV_wI1tP5QPc1BN4u8vYdcaTQM2GuSfKUeoqpw="
-    sms = Client(api_key)
-    message = sms.send(
-        sender="+983000505",
-        recipients=[phone_number, ],
-        message=f' خوش امدید:کد تایید شما {otp_code} \nعباس پروژه',
-        summary='description'
+    requests.get(
+        f'http://ippanel.com:8080/?apikey={api_key}&pid=7uvx79ioelosoty&fnum=3000505&tnum={phone_number}&p1=verification-code&v1={otp_code}'
     )
 
 

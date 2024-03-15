@@ -2,6 +2,7 @@ import random
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from requests import request
 
@@ -147,3 +148,4 @@ class ResetPasswordDoneView(auth_views.PasswordResetDoneView):
 class ResetPasswordConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'accounts/password_reset_confirm.html'
     success_url = reverse_lazy('home:index')
+
