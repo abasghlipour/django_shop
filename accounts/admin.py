@@ -24,7 +24,7 @@ class UserAdmin(ModelAdminJalaliMixin, BaseUserAdmin):
     list_display = ['email', 'phone_number', 'is_admin']
     list_filter = ['is_admin']
     fieldsets = (
-        (None, {'fields': ('email', 'phone_number', 'full_name', 'password', 'National_Code', 'Date_of_Birth')}),
+        (None, {'fields': ('email', 'phone_number', 'full_name', 'password', 'National_Code', 'Date_of_Birth','avatar')}),
         ('permissions', {'fields': ('is_active', 'is_admin', 'last_login',)})
     )
     add_fieldsets = (
