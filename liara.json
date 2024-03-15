@@ -5,7 +5,7 @@
   "disks": [
     {
       "name": "media",
-      "mountTo": "avatar"
+      "mountTo": "media"
     }
   ]
 }
