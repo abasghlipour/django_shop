@@ -149,3 +149,10 @@ class ResetPasswordConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'accounts/password_reset_confirm.html'
     success_url = reverse_lazy('home:index')
 
+class UserProfileView(LoginRequiredMixin,View):
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        return render(request, 'accounts/profile.html', {'user': user})
+
+    def post(self, request, *args, **kwargs):
+        pass

@@ -10,7 +10,7 @@ class User(AbstractBaseUser):
     National_Code=models.CharField(max_length=12, verbose_name='کد ملی', null=True, blank=True)
     Job=models.CharField(max_length=300, verbose_name='شغل', null=True, blank=True)
     Date_of_Birth = models.DateField(verbose_name='تاریخ تولد', null=True, blank=True)
-    avatar = models.ImageField(upload_to='media/avatars/', null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
     is_admin = models.BooleanField(default=False, verbose_name='ادمین / معمولی')
 
