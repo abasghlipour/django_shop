@@ -5,6 +5,66 @@
 {% endblock %}
 
 {% block content %}
+    <style>
+
+        .timer {
+            /* تنظیمات کلی تایمر */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 330px;
+            height: 100px;
+            background-color: #fa9614;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer__time {
+            /* تنظیمات مربوط به بخش زمان */
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        .timer__colon {
+            /* تنظیمات مربوط به دو نقطه */
+
+            font-size: 24px;
+            font-weight: normal;
+            color: #666;
+            margin: 0 5px;
+        }
+
+        .timer__sections {
+            /* تنظیمات مربوط به بخش های مختلف زمان */
+            display: flex;
+        }
+
+        .timer__section {
+            /* تنظیمات کلی هر بخش */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .timer__label {
+            /* تنظیمات مربوط به برچسب هر بخش */
+            font-size: 16px;
+            font-weight: normal;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .timer__value {
+            /* تنظیمات مربوط به مقدار هر بخش */
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
     <div class="container">
         <section id="form"><!--form-->
             <div class="row justify-content-center">
@@ -48,7 +108,7 @@
                             }
 
                             function startTimer() {
-                                minutes = 4;
+                                minutes = 1;
                                 seconds = 60;
                                 document.getElementById('seconds').innerHTML = seconds;
                                 document.getElementById('minutes').innerHTML = minutes;
@@ -60,14 +120,16 @@
 
                         </script>
                         <br>
-                        <div class="otp-timer">
-                            <span class="text"> زمان باقیمانده :</span>
-                            <span id="seconds">00</span>
-                            <span class="dot">:</span>
-                            <span id="minutes">0</span>
-                            <button class="btn btn-info" id="my-button" disabled
-                                    onclick="location.href='{% url "accounts:resend" %}'">ارسال مجدد
-                            </button>
+                        <div class="timer">
+                            <div class="timer__time">
+                                <span class="timer__label"> زمان باقیمانده :</span>
+                                <span class="timer__value " id="seconds">00</span>
+                                <span class="timer__colon ">:</span>
+                                <span class="timer__value " id="minutes">0</span>
+                                <button class="btn btn-default" id="my-button" disabled
+                                        onclick="location.href='{% url "accounts:resend" %}'">ارسال مجدد
+                                </button>
+                            </div>
                         </div>
 
 

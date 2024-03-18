@@ -2,12 +2,6 @@
   "django": {
     "pythonVersion": "3.10"
   },
-  "disks": [
-    {
-      "name": "media",
-      "mountTo": "media"
-    }
-  ],
   "cron": [
     "0 0 * * 5 cd $ROOT && python3 manage.py remove_expired_otps >> /dev/null 2>&1"
   ]
