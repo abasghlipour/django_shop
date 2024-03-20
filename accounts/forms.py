@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from .models import User, Otp_code
+from django.shortcuts import get_object_or_404
 
 
 class UserCreationForm(forms.ModelForm):
@@ -88,7 +89,8 @@ class UserLoginForm(forms.Form):
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data['phone_number']
-        user = User.objects.filter(phone_number=phone_number).exists()
-        if not user:
+        try:
+            user = User.objects.get(phone_number=phone_number)
+        except:
             raise forms.ValidationError('شما قبلا ثبت نام نکرده اید')
         return phone_number

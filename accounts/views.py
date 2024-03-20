@@ -104,9 +104,9 @@ class UserLoginView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request, phone_number=cd['phone_number'], password=cd['password'])
-            if user is not None:
+            user = authenticate(request, phone_number=form.cleaned_data['phone_number'],
+                                password=form.cleaned_data['password'])
+            if user:
                 login(request, user)
                 messages.success(request, 'شما با موفقیت وارد شدید', 'success')
                 if self.next:
