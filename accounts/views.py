@@ -104,15 +104,12 @@ class UserLoginView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            user = authenticate(request, phone_number=form.cleaned_data['phone_number'],
-                                password=form.cleaned_data['password'])
-            if user:
+            user = User.objects.get(phone_number=form.cleaned_data['phone_number'])
+            if user.check_password(form.cleaned_data['password']):
                 login(request, user)
-                messages.success(request, 'شما با موفقیت وارد شدید', 'success')
-                if self.next:
-                    return redirect(self.next)
+                messages.success(request, 'شما با موفیقت وارد شدید', 'success')
                 return redirect('home:index')
-            messages.error(request, 'رمز عبور یا شماره تلفن اشتباه است', 'warning')
+            messages.error(request, 'رمز عبور اشتباه است', 'danger')
             return redirect('accounts:login')
         messages.error(request, 'شما قبلا ثبت نام نکرده اید', 'danger')
         return redirect('accounts:register')

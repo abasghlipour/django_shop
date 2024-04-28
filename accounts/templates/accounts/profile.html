@@ -13,7 +13,7 @@
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <img src="{{ user.avatar.url }}" alt="">
-                                <h3>بزرگنمایـی</h3>
+                                <a href="{{ user.avatar.url }}"><h3>بزرگنمایـی</h3></a>
                             </div>
                         </div>
 
@@ -21,21 +21,36 @@
                             <div class="product-information"><!--/product-information-->
                                 <img src="" class="newarrival" alt="">
                                 <div>
-                                    <h2>کـالای شمـاره 010</h2>
-                                    <p>شناسـه : 0110110</p>
+                                    <h2>{{ user.full_name }}</h2>
+                                    <p>ایمیل :{{ user.email }} </p>
+                                    <br>
+                                    <h5>تاریخ تولد:{{ user.Date_of_Birth|timesince }}  </h5>
+                                    <h5>{{ user.Job }}</h5>
+
                                 </div>
-                                <div>
-									<span>
-										<span>قیمت : 2.350.000 ريال</span>
-									</span>
-                                    <span>
-										<label>تعداد :</label>
-										<input type="text" value="3" class="search_box">
-										<button type="button" class="btn btn-fefault cart">
-											<i class="fa fa-shopping-cart"></i>
-											افـزودن به سبـد خریـد
-										</button>
-									</span>
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                Accordion Item #1
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <strong>This is the first item's accordion body.</strong> It is shown by
+                                                default, until the collapse plugin adds the appropriate classes that we
+                                                use to style each element. These classes control the overall appearance,
+                                                as well as the showing and hiding via CSS transitions. You can modify
+                                                any of this with custom CSS or overriding our default variables. It's
+                                                also worth noting that just about any HTML can go within the <code>.accordion-body</code>,
+                                                though the transition does limit overflow.
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div><!--/product-information-->
                         </div>

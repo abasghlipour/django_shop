@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from datetime import timedelta
 
-import dj_database_url
+
 from django import core
 
 from pathlib import Path
@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%y2v2gqv_1!ze_kmf4ks+vygo!^(f4kj8**zz96!=9()9csn#+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
 
